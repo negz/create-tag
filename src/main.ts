@@ -1,6 +1,6 @@
-import * as core from '@actions/core';
-import * as github from '@actions/github';
-import * as semver from 'semver';
+import * as core from '@actions/core'
+import * as github from '@actions/github'
+import * as semver from 'semver'
 
 async function run(): Promise<void> {
   try {
@@ -9,7 +9,9 @@ async function run(): Promise<void> {
     const msg = core.getInput('message')
 
     if (semver.valid(tag) == null) {
-      core.setFailed(`Tag ${tag} does not appear to be a valid semantic version`)
+      core.setFailed(
+        `Tag ${tag} does not appear to be a valid semantic version`
+      )
       return
     }
 
@@ -21,12 +23,12 @@ async function run(): Promise<void> {
     const client = github.getOctokit(token)
 
     const tag_rsp = await client.git.createTag({
-      owner: owner,
-      repo: repo,
-      tag: tag,
+      owner,
+      repo,
+      tag,
       message: msg,
       object: sha,
-      type: "commit",
+      type: 'commit'
     })
     if (tag_rsp.status !== 201) {
       core.setFailed(`Failed to create tag object (status=${tag_rsp.status})`)
@@ -34,10 +36,10 @@ async function run(): Promise<void> {
     }
 
     const ref_rsp = await client.git.createRef({
-      owner: owner,
-      repo: repo,
-      ref: ref,
-      sha: sha,
+      owner,
+      repo,
+      ref,
+      sha
     })
     if (ref_rsp.status !== 201) {
       core.setFailed(`Failed to create tag ref (status=${tag_rsp.status})`)
@@ -45,7 +47,6 @@ async function run(): Promise<void> {
     }
 
     core.info(`Tagged ${sha} as ${tag}`)
-
   } catch (error) {
     core.setFailed(error.message)
   }

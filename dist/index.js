@@ -1836,7 +1836,7 @@ function run() {
     return __awaiter(this, void 0, void 0, function* () {
         try {
             const token = core.getInput('token');
-            const tag = core.getInput('tag');
+            const tag = core.getInput('version');
             const msg = core.getInput('message');
             if (semver.valid(tag) == null) {
                 core.setFailed(`Tag ${tag} does not appear to be a valid semantic version`);
@@ -1848,22 +1848,22 @@ function run() {
             const ref = `refs/tags/${tag}`;
             const client = github.getOctokit(token);
             const tag_rsp = yield client.git.createTag({
-                owner: owner,
-                repo: repo,
-                tag: tag,
+                owner,
+                repo,
+                tag,
                 message: msg,
                 object: sha,
-                type: "commit",
+                type: 'commit'
             });
             if (tag_rsp.status !== 201) {
                 core.setFailed(`Failed to create tag object (status=${tag_rsp.status})`);
                 return;
             }
             const ref_rsp = yield client.git.createRef({
-                owner: owner,
-                repo: repo,
-                ref: ref,
-                sha: sha,
+                owner,
+                repo,
+                ref,
+                sha
             });
             if (ref_rsp.status !== 201) {
                 core.setFailed(`Failed to create tag ref (status=${tag_rsp.status})`);

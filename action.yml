@@ -1,11 +1,13 @@
-name: 'Your name here'
-description: 'Provide a description here'
-author: 'Your name or organization here'
+name: 'Create Tag'
+description: 'Tag a git commit with a semantic version'
+author: 'Nic Cope'
 inputs:
-  milliseconds: # change this
+  version:
+    description: 'Version (e.g. v0.1.0)'
     required: true
-    description: 'input description here'
-    default: 'default value if applicable'
+  message:
+    description: 'Tag message'
+    required: true
 runs:
   using: 'node12'
   main: 'dist/index.js'

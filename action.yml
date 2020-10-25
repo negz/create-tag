@@ -2,6 +2,9 @@ name: 'Create Tag'
 description: 'Tag a git commit with a semantic version'
 author: 'Nic Cope'
 inputs:
+  token:
+    description: Github Token
+    required: true
   version:
     description: 'Version (e.g. v0.1.0)'
     required: true

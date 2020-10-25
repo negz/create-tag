@@ -13,12 +13,3 @@ jobs:
           npm install
       - run: |
           npm run all
-  test:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-      - uses: ./
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          version: v0.0.0-master
-          message: "Test version"

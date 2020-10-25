@@ -1,6 +1,9 @@
 name: 'Create Tag'
 description: 'Tag a git commit with a semantic version'
 author: 'Nic Cope'
+branding:
+    icon: git-commit
+    color: white
 inputs:
   token:
     description: Github Token

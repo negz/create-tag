@@ -26,7 +26,7 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Create Tag
-        uses: negz/create-tag@v0.1.0
+        uses: negz/create-tag@v1
         with:
           version: ${{ github.event.inputs.version }}
           message: ${{ github.event.inputs.message }}

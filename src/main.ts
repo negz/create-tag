@@ -1,11 +1,11 @@
 import * as core from '@actions/core'
 import * as github from '@actions/github'
-import * as semver from 'semver'
+import {parseVersion} from './version'
 
 async function run(): Promise<void> {
   try {
     const tag = core.getInput('version')
-    if (semver.valid(tag) == null) {
+    if (parseVersion(tag) == null) {
       core.setFailed(
         `Tag ${tag} does not appear to be a valid semantic version`
       )
